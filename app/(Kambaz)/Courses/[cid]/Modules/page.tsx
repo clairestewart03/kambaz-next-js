@@ -3,7 +3,13 @@ import CourseStatus from "@/app/(Kambaz)/Courses/[cid]/Home/Status";
 export default function Modules() {
     return (
         <div>
-            {/* Implement Collapse All button, View Progress button, etc. */}
+            <button>Collapse All</button>
+            <button>View Progress</button>
+            <select id='wd-publish-all'>
+                <option value='Publish All'>Publish All</option>
+                <option value='Unpublish All'>Unpublish All</option>
+            </select>
+            <button>+ Module</button>
             <ul>
                 <li className="wd-module">
                     <div className="wd-title">Week 1</div>
