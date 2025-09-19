@@ -1,4 +1,13 @@
 import Link from "next/link";
+import {redirect} from "next/dist/client/components/navigation";
+
+export default function Labs() {
+    redirect("/Labs/Lab1");
+}
+
+
+
+/*
 export default function Labs() {
     return (
         <div id="wd-labs">
@@ -16,3 +25,5 @@ export default function Labs() {
             </ul>
         </div>
     );}
+
+ */
