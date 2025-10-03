@@ -1,156 +1,136 @@
+import { FormLabel, Row, Col, FormCheck, FormSelect, Button } from "react-bootstrap";
+import InputGroupText from "react-bootstrap/esm/InputGroupText";
+import { InputGroup } from "react-bootstrap";
+import FormControl from "react-bootstrap/esm/FormControl";
+import Form from "react-bootstrap/Form";
+import { BiCalendar } from "react-icons/bi";
+
+
 export default function AssignmentEditor() {
     return (
-        <div id="wd-assignments-editor">
-            <label htmlFor="wd-name">Assignment Name</label> <br /><br />
-            <input id="wd-name" defaultValue="A1 - ENV + HTML" /><br /><br />
-            <textarea id="wd-description" defaultValue={"The assignment is available online. Submit a link to the landing page of your" +
-                " Web application running on Netlify. The landing page should include the following:" +
-                " Your full name and section Links to each of the lab assignments, Link to the Kambaz" +
-                " application, Links to all relevant source code repositories. The Kambaz application" +
-                " should include a link to navigate back to the landing page."}>
-      </textarea>
-            <br /> <br />
-            <table>
-                <tbody>
-                <tr>
-                    <td align="right" valign="top">
-                        <label htmlFor="wd-points">Points </label>
-                    </td>
-                    <td>
-                        <input id="wd-points" type="number" defaultValue={100}/>
-                    </td>
-                </tr>
-                <tr>
-                    <td><br/></td>
-                </tr>
-                <tr>
-                    <td align="right" valign="top">
-                        <label htmlFor="wd-group">Assignment Group </label>
-                    </td>
-                    <td>
-                        <select id='wd-group' defaultValue='ASSIGNMENTS'>
-                            <option value='ASSIGNMENTS'>ASSIGNMENTS</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><br/></td>
-                </tr>
-                <tr>
-                    <td align="right" valign="top">
-                        <label htmlFor="wd-display-grade-as">Display Grade as </label>
-                    </td>
-                    <td>
-                        <select id='wd-display-grade-as' defaultValue='Percentage'>
-                            <option value='Percentage'>Percentage</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><br/></td>
-                </tr>
-                <tr>
-                    <td align="right" valign="top">
-                        <label htmlFor="wd-submission-type">Submission Type </label>
-                    </td>
-                    <td>
-                        <select id='wd-submission-type' defaultValue='Online'>
-                            <option value='Online'>Online</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><br/></td>
-                </tr>
-                <tr>
-                    <td>
+        <div id="wd-assignments-editor" className='p-2'>
+            <FormLabel>Assignment Name</FormLabel>
+            <InputGroupText>A1</InputGroupText>
+            <br />
+            <FormControl as="textarea" rows={4}>
+                This assignment is available online. 
+            </FormControl>
+            <br />
 
-                    </td>
-                    <td>
-                        <label> Online Entry Options</label><br/>
-                        <input type="checkbox" name="entry-options" id="wd-text-entry"/>
-                        <label htmlFor="wd-text-entry">Text Entry</label><br/>
-                        <input type="checkbox" name="entry-options" id="wd-website-url"/>
-                        <label htmlFor="wd-website-url">Website URL</label><br/>
-                        <input type="checkbox" name="entry-options" id="wd-media-recordings"/>
-                        <label htmlFor="wd-media-recordings">Media Recordings</label><br/>
-                        <input type="checkbox" name="entry-options" id="wd-student-annotation"/>
-                        <label htmlFor="wd-student-annotation">Student Annotation</label><br/>
-                        <input type="checkbox" name="entry-options" id="wd-file-upload"/>
-                        <label htmlFor="wd-file-upload">File Uploads</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td><br/></td>
-                </tr>
-                <tr>
-                    <td align="right" valign="top">
-                        <label>Assign </label>
-                    </td>
-                    <td align="left" valign="top">
-                        <label htmlFor="wd-assign-to">Assign to </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <input id="wd-assign-to" defaultValue={"Everyone"}/>
-                    </td>
-                </tr>
-                <tr>
-                    <td><br/></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td align="left" valign="top">
-                        <label htmlFor="wd-due-date">Due </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="date" defaultValue="2024-05-13" id="wd-due-date"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td><br/></td>
-                </tr>
-                <tr>
-                    <td>
-                    </td>
-                    <td align={"left"} valign="top">
-                        <label htmlFor={"wd-available-from"}>Available from </label>
-                    </td>
-                    <td align={"left"} valign="top">
-                        <label htmlFor={"wd-available-until"}>Until </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td><br/></td>
-                    <td>
-                        <input type="date" defaultValue="2024-05-06" id="wd-available-from"></input>
+            <Form>
+                    <Row className="mb-3" controlId="wd-points">
+                        <FormLabel column sm={2}> Points </FormLabel>
+                        <Col sm={10}> <InputGroupText>100</InputGroupText> </Col>
+                    </Row>
+                    <Row className="mb-3" controlId="wd-group">
+                        <FormLabel column sm={2}> Assignment Group </FormLabel>
+                        <Col sm={10}> 
+                            <FormSelect>
+                                <option value="0" defaultChecked>ASSIGNMENTS</option>
+                            </FormSelect>
+                         </Col>
+                    </Row>
+                    <Row className="mb-3" controlId="wd-display-grade-as">
+                        <FormLabel column sm={2}> Display Grade as </FormLabel>
+                        <Col sm={10}> 
+                            <FormSelect>
+                                <option value="0" defaultChecked>Percentage</option>
+                            </FormSelect>
+                         </Col>
+                    </Row>
+                    <Row className="mb-3" controlId="wd-group">
+                        <FormLabel column sm={2}> Submission Type </FormLabel>
+                        <Col sm={10}> 
+                        <div className="border border-1  p-3">
+                            <FormSelect>
+                                <option value="0" defaultChecked>Online</option>
+                            </FormSelect>
+                            <br/>
+                            <FormLabel> <strong>Online Entry Options</strong></FormLabel>
+                            <Form.Check 
+                                type="checkbox"     
+                                id="wd-submission-type"
+                                label="Text Entry"  
+                                defaultChecked={false}        
+                            />
+                            <Form.Check 
+                                type="checkbox"     
+                                id="wd-submission-type"
+                                label="Website URL"  
+                                defaultChecked={false}        
+                            />
+                            <Form.Check 
+                                type="checkbox"     
+                                id="wd-submission-type"
+                                label="Media Recordings"  
+                                defaultChecked={false}        
+                            />
+                            <Form.Check 
+                                type="checkbox"     
+                                id="wd-submission-type"
+                                label="Student Annotation"  
+                                defaultChecked={false}        
+                            />
+                            <Form.Check 
+                                type="checkbox"     
+                                id="wd-submission-type"
+                                label="File Uploads"  
+                                defaultChecked={false}        
+                            />
+                            </div>
+                         </Col>
+                    </Row>
+                    <Row className="mb-3" controlId="wd-assign-to">
+                        <FormLabel column sm={2}> Assign </FormLabel>
+                        <Col sm={10}> 
+                        <div className="border border-1  p-3">
+                            <FormLabel><strong>Assign to</strong></FormLabel>
+                            <InputGroup>
+                                <InputGroupText>Everyone<span className='ms-3'>X</span></InputGroupText>
+                                <FormControl />
+                             </InputGroup>
+                             <br/>
+                             <FormLabel><strong>Due</strong></FormLabel>
+                            <InputGroup>
+                                <FormControl value='May 13, 2024, 11:59 PM'/>
+                                <InputGroupText><BiCalendar className="fs-4"/></InputGroupText>
+                             </InputGroup>
+                             <br/>
+                             <Row className="g-3">
+                             <Col md={6}>
+                                <FormLabel><strong>Available from</strong></FormLabel>
+                                <InputGroup>
+                                <FormControl value="May 13, 2024, 11:59 PM" />
+                                <InputGroupText>
+                                    <BiCalendar className="fs-4" />
+                                </InputGroupText>
+                                </InputGroup>
+                            </Col>
 
-                    </td>
-                    <td>
-                        <input type="date" defaultValue="2024-05-20"
-                               id="wd-available-until"></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td><br/></td>
-                </tr>
-                </tbody>
-            </table>
-            <hr/>
-            <table width="100%">
-                <tr>
-                    <td align="right">
-                        <button>Cancel</button>
-                        <button>Save</button>
-                    </td>
-                </tr>
-            </table>
+                            <Col md={6}>
+                                <FormLabel><strong>Until</strong></FormLabel>
+                                <InputGroup>
+                                <FormControl value="May 13, 2024, 11:59 PM" />
+                                <InputGroupText>
+                                    <BiCalendar className="fs-4" />
+                                </InputGroupText>
+                                </InputGroup>
+                            </Col>
+                            </Row>
+
+
+                        </div>
+                        </Col>
+                    </Row>
+                    
+                    </Form>
+                <hr />
+                <div className='d-flex justify-content-end gap-1'>
+                <Button variant="secondary"> Cancel</Button>
+                <Button variant="danger" className="me-2">
+                    Save</Button>
+            
+                </div>
 
         </div>
     );
