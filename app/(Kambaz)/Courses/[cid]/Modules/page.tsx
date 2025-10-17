@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react/jsx-key */
 "use client";
 import { useParams } from "next/navigation"; 
 import * as db from "../../../Database";
@@ -14,9 +16,7 @@ export default function Modules() {
         <div className='p-4'>
             <ModulesControls /> <br/> <br/> <br/>
             <ListGroup id="wd-modules" className="rounded-0">
-                {modules
-          .filter((module: any) => module.course === cid)
-          .map((module: any) => (
+                {modules.filter((module: any) => module.course === cid).map((module: any) => (
           <ListGroupItem className="wd-module p-0 mb-5 fs-5 border-gray">
             <div className="wd-title p-3 ps-2 bg-secondary">
               <BsGripVertical className="me-2 fs-3" /> {module.name} <ModuleControlButtons />

@@ -4,11 +4,10 @@ export default function FormatDate({rawDate}: {rawDate: string}) {
     const dateString = date.toLocaleDateString("en-US", options);
 
     let hours = date.getHours();
-    let minutes = date.getMinutes().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
     const ampm = hours >= 12 ? 'pm' : 'am';
     hours = hours % 12 || 12;
-    const formattedDate = `${dateString} at ${hours}:${minutes}${ampm}`;
-    
-    return <span>{formattedDate}</span>;
-}
 
+    return `${dateString} at ${hours}:${minutes}${ampm}`;
+
+}

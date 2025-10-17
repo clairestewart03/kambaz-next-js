@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react/jsx-key */
 "use client";
 import Link from "next/link";
 import { Button, ListGroup, ListGroupItem, InputGroup, FormControl } from "react-bootstrap";
@@ -60,6 +62,7 @@ export default function Assignments() {
                     <AssignmentDescriptionButtons />
                     </div>
                     </ListGroupItem>
+
                     ))}
                 </ListGroup>
         
@@ -67,12 +70,4 @@ export default function Assignments() {
         </div>
     );}
 
-    /*
- {assignment.lessons && (
-              <ListGroup className="wd-lessons rounded-0">
-                {module.lessons.map((lesson: any) => (
-                  <ListGroupItem className="wd-lesson p-3 ps-1">
-                    <BsGripVertical className="me-2 fs-3" /> {lesson.name} <LessonControlButtons />
-                  </ListGroupItem>
-                ))}</ListGroup>)}</ListGroupItem>))}</ListGroup>
-    */
+  

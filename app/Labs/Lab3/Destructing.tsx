@@ -1,4 +1,6 @@
+/* eslint-disable-next-line react/no-unescaped-entities */
 export default function Destructing() {
+
     const person = { name: "John", age: 25 };
     const { name, age } = person;
     // const name = person.name

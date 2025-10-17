@@ -14,9 +14,9 @@ import Link from "next/link";
 export default function AssignmentEditor() {
     const { cid } = useParams();
     const { aid } = useParams();
-    let assignment = db.assignments.find(a => a._id === aid)!;
-    let availableDateFormatted = formatDateString(assignment?.availableDate);
-    let dueDateFormatted = formatDateString(assignment?.dueDate);
+    const assignment = db.assignments.find(a => a._id === aid)!;
+    const availableDateFormatted = formatDateString(assignment?.availableDate);
+    const dueDateFormatted = formatDateString(assignment?.dueDate);
 
 
 
