@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { Button, ListGroup, ListGroupItem, InputGroup, FormControl } from "react-bootstrap";
 import { BsGripVertical } from "react-icons/bs";
@@ -7,8 +8,14 @@ import { TbFilePencil } from "react-icons/tb";
 import AssignmentDescriptionButtons from "./AssignmentDescriptionButtons";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import InputGroupText from "react-bootstrap/esm/InputGroupText";
+import { useParams } from "next/navigation";
+import * as db from "../../../Database";
+import FormatDate from "./FormatDate";
 
 export default function Assignments() {
+    const { cid } = useParams();
+    const assignments = db.assignments;
+
     return (
         <div id="wd-assignments">
             <div className='d-flex align-items-center justify-content-between'>
@@ -36,56 +43,36 @@ export default function Assignments() {
                      ASSIGNMENTS <AssignmentControlButtons />
                 </div>
                 </ListGroupItem> 
-                <ListGroup className="wd-assignment-list-item rounded-0">
-                    <ListGroupItem className="wd-assignment-description p-3 ps-1 d-flex">
-                        <BsGripVertical className="me-2 fs-3" />
-                        <TbFilePencil className="me-2 fs-3" color="green" />
-                         <p id='wd-assignment-description' className='mb-0 small'>
-                        <span className='fs-6'>
-                            <Link href='/Courses/1234/Assignments/1'
-                            className='text-decoration-none text-reset'>
-                                <strong>A1</strong> <br /></Link></span>
-                        <span className='text-danger'>Multiple Modules </span> | <strong>Not available until</strong> May 6 at 12:00am |
-                        <strong> <br /> Due</strong> May 13 at 11:59pm | 100 pts</p>
-                    <div className='ms-auto d-flex align-items-center'>
-                    <AssignmentDescriptionButtons />
-                    </div>
-                    </ListGroupItem>
-                </ListGroup>
 
-                <ListGroup className="wd-assignment-list-item rounded-0">
-                    <ListGroupItem className="wd-assignment-description p-3 ps-1 d-flex">
-                        <BsGripVertical className="me-2 fs-3" />
+                <ListGroup id="wd-assignment-list-item" className="rounded-0">
+                {assignments.filter((assignment: any) => assignment.course === cid).map((assignment: any) => (
+            <ListGroupItem className="wd-assignment-description p-3 ps-1 d-flex">
+                <BsGripVertical className="me-2 fs-3" />
                         <TbFilePencil className="me-2 fs-3" color="green" />
                          <p id='wd-assignment-description' className='mb-0 small'>
                         <span className='fs-6'>
-                        <Link href='/Courses/1234/Assignments/2'
+                            <Link href={`/Courses/${cid}/Assignments/${assignment._id}`}
                             className='text-decoration-none text-reset'>
-                                <strong>A2</strong> <br /></Link></span>
-                        <span className='text-danger'>Multiple Modules </span> | <strong>Not available until</strong> May 13 at 12:00am |
-                        <strong> <br /> Due</strong> May 20 at 11:59pm | 100 pts</p>
+                                <strong>{assignment.title}</strong> <br /></Link></span>
+                        <span className='text-danger'>Multiple Modules </span> | <strong>Not available until</strong> <FormatDate rawDate={assignment.availableDate}/> |
+                        <strong> <br /> Due</strong> <FormatDate rawDate={assignment.dueDate}/> | {assignment.points} pts</p>
                     <div className='ms-auto d-flex align-items-center'>
                     <AssignmentDescriptionButtons />
                     </div>
                     </ListGroupItem>
+                    ))}
                 </ListGroup>
-
-                <ListGroup className="wd-assignment-list-item rounded-0">
-                    <ListGroupItem className="wd-assignment-description p-3 ps-1 d-flex">
-                        <BsGripVertical className="me-2 fs-3" />
-                        <TbFilePencil className="me-2 fs-3" color="green" />
-                         <p id='wd-assignment-description' className='mb-0 small'>
-                        <span className='fs-6'>
-                        <Link href='/Courses/1234/Assignments/3'
-                            className='text-decoration-none text-reset'>
-                                <strong>A3</strong> <br /></Link></span>
-                        <span className='text-danger'>Multiple Modules </span> | <strong>Not available until</strong> May 20 at 12:00am |
-                        <strong> <br /> Due</strong> May 27 at 11:59pm | 100 pts</p>
-                    <div className='ms-auto d-flex align-items-center'>
-                    <AssignmentDescriptionButtons />
-                    </div>
-                    </ListGroupItem>
-                </ListGroup>
+        
         </ListGroup>
         </div>
     );}
+
+    /*
+ {assignment.lessons && (
+              <ListGroup className="wd-lessons rounded-0">
+                {module.lessons.map((lesson: any) => (
+                  <ListGroupItem className="wd-lesson p-3 ps-1">
+                    <BsGripVertical className="me-2 fs-3" /> {lesson.name} <LessonControlButtons />
+                  </ListGroupItem>
+                ))}</ListGroup>)}</ListGroupItem>))}</ListGroup>
+    */

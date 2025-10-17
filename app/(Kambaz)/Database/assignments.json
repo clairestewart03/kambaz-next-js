@@ -1,0 +1,219 @@
+[
+    {
+      "_id": "A101",
+      "title": "Propulsion Assignment",
+      "course": "RS101",
+      "points": 100,
+      "description": "Calculate thrust efficiency and analyze engine performance using provided data.",
+      "availableDate": "2025-01-15T23:59:00",
+      "dueDate": "2025-01-22T23:59:00"
+    },
+    {
+      "_id": "A102",
+      "title": "Combustion Analysis",
+      "course": "RS101",
+      "points": 90,
+      "description": "Evaluate combustion chamber performance through pressure and temperature graphs.",
+      "availableDate": "2025-01-25T23:59:00",
+      "dueDate": "2025-02-02T23:59:00"
+    },
+    {
+      "_id": "A103",
+      "title": "Nozzle Design Project",
+      "course": "RS101",
+      "points": 120,
+      "description": "Design and optimize a rocket nozzle to achieve maximum exit velocity.",
+      "availableDate": "2025-02-05T23:59:00",
+      "dueDate": "2025-02-16T23:59:00"
+    },
+    {
+      "_id": "A201",
+      "title": "Aerodynamics Quiz",
+      "course": "RS102",
+      "points": 50,
+      "description": "Short quiz covering lift, drag, and airflow principles.",
+      "availableDate": "2025-02-19T23:59:00",
+      "dueDate": "2025-02-21T23:59:00"
+    },
+    {
+      "_id": "A202",
+      "title": "Flow Analysis",
+      "course": "RS102",
+      "points": 100,
+      "description": "Analyze laminar and turbulent flow patterns in simulated wind tunnel tests.",
+      "availableDate": "2025-02-24T23:59:00",
+      "dueDate": "2025-03-03T23:59:00"
+    },
+    {
+      "_id": "A203",
+      "title": "Heating Analysis",
+      "course": "RS102",
+      "points": 110,
+      "description": "Determine heat transfer rates across different aerodynamic surfaces.",
+      "availableDate": "2025-03-05T23:59:00",
+      "dueDate": "2025-03-14T23:59:00"
+    },
+    {
+      "_id": "A301",
+      "title": "Structural Design Task",
+      "course": "RS103",
+      "points": 100,
+      "description": "Design a lightweight yet durable spacecraft frame to meet given constraints.",
+      "availableDate": "2025-03-17T23:59:00",
+      "dueDate": "2025-03-28T23:59:00"
+    },
+    {
+      "_id": "A302",
+      "title": "Orbital Calculations",
+      "course": "RS103",
+      "points": 120,
+      "description": "Compute orbital trajectories and delta-v requirements for satellite insertion.",
+      "availableDate": "2025-03-31T23:59:00",
+      "dueDate": "2025-04-09T23:59:00"
+    },
+    {
+      "_id": "A303",
+      "title": "Systems Engineering Exam",
+      "course": "RS103",
+      "points": 150,
+      "description": "Comprehensive exam on spacecraft subsystems and design integration.",
+      "availableDate": "2025-04-10T23:59:00",
+      "dueDate": "2025-04-15T23:59:00"
+    },
+    {
+      "_id": "A401",
+      "title": "Avionics Systems Assignment",
+      "course": "RS104",
+      "points": 100,
+      "description": "Analyze avionics communication and control systems within modern aircraft.",
+      "availableDate": "2025-04-17T23:59:00",
+      "dueDate": "2025-04-25T23:59:00"
+    },
+    {
+      "_id": "A402",
+      "title": "Signal Processing Quiz",
+      "course": "RS104",
+      "points": 60,
+      "description": "Test on signal filtering and noise reduction techniques in avionics.",
+      "availableDate": "2025-04-28T23:59:00",
+      "dueDate": "2025-04-30T23:59:00"
+    },
+    {
+      "_id": "A403",
+      "title": "Telemetry Design Project",
+      "course": "RS104",
+      "points": 140,
+      "description": "Develop a telemetry system for real-time spacecraft data transmission.",
+      "availableDate": "2025-05-01T23:59:00Z",
+      "dueDate": "2025-05-12T23:59:00"
+    },
+    {
+      "_id": "A501",
+      "title": "Spacecraft Dynamics Report",
+      "course": "RS105",
+      "points": 120,
+      "description": "Analyze the rotational and translational dynamics of an orbiting spacecraft.",
+      "availableDate": "2025-05-13T23:59:00",
+      "dueDate": "2025-05-22T23:59:00"
+    },
+    {
+      "_id": "A502",
+      "title": "Attitude Control Simulation",
+      "course": "RS105",
+      "points": 130,
+      "description": "Simulate spacecraft attitude control using thrusters and reaction wheels.",
+      "availableDate": "2025-05-23T23:59:00",
+      "dueDate": "2025-06-02T23:59:00"
+    },
+    {
+      "_id": "A503",
+      "title": "Trajectory Optimization Task",
+      "course": "RS105",
+      "points": 110,
+      "description": "Optimize spacecraft trajectory for minimal fuel consumption and travel time.",
+      "availableDate": "2025-06-04T23:59:00",
+      "dueDate": "2025-06-13T23:59:00"
+    },
+    {
+      "_id": "A601",
+      "title": "Materials Testing Lab",
+      "course": "RS106",
+      "points": 90,
+      "description": "Test aerospace materials for tensile strength and thermal resilience.",
+      "availableDate": "2025-06-15T23:59:00",
+      "dueDate": "2025-06-22T23:59:00"
+    },
+    {
+      "_id": "A602",
+      "title": "Fatigue Analysis Report",
+      "course": "RS106",
+      "points": 100,
+      "description": "Analyze cyclic stress behavior in lightweight aerospace alloys.",
+      "availableDate": "2025-06-23T23:59:00",
+      "dueDate": "2025-07-02T23:59:00"
+    },
+    {
+      "_id": "A603",
+      "title": "Thermal Protection Design",
+      "course": "RS106",
+      "points": 130,
+      "description": "Design a thermal protection system suitable for atmospheric re-entry.",
+      "availableDate": "2025-07-04T23:59:00",
+      "dueDate": "2025-07-15T23:59:00"
+    },
+    {
+      "_id": "A701",
+      "title": "Launch Vehicle Design",
+      "course": "RS107",
+      "points": 150,
+      "description": "Develop a conceptual design for a reusable orbital launch vehicle.",
+      "availableDate": "2025-07-17T23:59:00",
+      "dueDate": "2025-07-30T23:59:00"
+    },
+    {
+      "_id": "A702",
+      "title": "Payload Integration Task",
+      "course": "RS107",
+      "points": 120,
+      "description": "Integrate multiple payloads into a shared launch configuration.",
+      "availableDate": "2025-08-01T23:59:00",
+      "dueDate": "2025-08-10T23:59:00"
+    },
+    {
+      "_id": "A703",
+      "title": "Mission Simulation Project",
+      "course": "RS107",
+      "points": 140,
+      "description": "Run a full mission simulation from launch to orbital insertion.",
+      "availableDate": "2025-08-12T23:59:00",
+      "dueDate": "2025-08-23T23:59:00"
+    },
+    {
+      "_id": "A801",
+      "title": "Satellite Communications Assignment",
+      "course": "RS108",
+      "points": 110,
+      "description": "Analyze link budgets and frequency allocation for satellite communication systems.",
+      "availableDate": "2025-08-25T23:59:00",
+      "dueDate": "2025-09-04T23:59:00"
+    },
+    {
+      "_id": "A802",
+      "title": "Ground Station Systems Quiz",
+      "course": "RS108",
+      "points": 70,
+      "description": "Quiz on antenna tracking, signal modulation, and uplink/downlink operations.",
+      "availableDate": "2025-09-06T23:59:00",
+      "dueDate": "2025-09-08T23:59:00"
+    },
+    {
+      "_id": "A803",
+      "title": "Network Architecture Project",
+      "course": "RS108",
+      "points": 150,
+      "description": "Design a satellite network architecture for global communication coverage.",
+      "availableDate": "2025-09-10T23:59:00",
+      "dueDate": "2025-09-22T23:59:00"
+    }
+  ]
+  

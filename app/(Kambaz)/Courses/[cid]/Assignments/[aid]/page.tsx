@@ -1,26 +1,40 @@
+"use client";
 import { FormLabel, Row, Col, FormCheck, FormSelect, Button } from "react-bootstrap";
 import InputGroupText from "react-bootstrap/esm/InputGroupText";
 import { InputGroup } from "react-bootstrap";
 import FormControl from "react-bootstrap/esm/FormControl";
 import Form from "react-bootstrap/Form";
 import { BiCalendar } from "react-icons/bi";
+import { useParams } from "next/navigation";
+import * as db from "../../../../Database";
+import { formatDateString } from "../FormatDateString";
+import Link from "next/link";
 
 
 export default function AssignmentEditor() {
+    const { cid } = useParams();
+    const { aid } = useParams();
+    let assignment = db.assignments.find(a => a._id === aid)!;
+    let availableDateFormatted = formatDateString(assignment?.availableDate);
+    let dueDateFormatted = formatDateString(assignment?.dueDate);
+
+
+
     return (
         <div id="wd-assignments-editor" className='p-2'>
             <FormLabel>Assignment Name</FormLabel>
-            <InputGroupText>A1</InputGroupText>
+            <FormControl defaultValue={assignment?.title}/>
             <br />
             <FormControl as="textarea" rows={4}>
-                This assignment is available online. 
+                {assignment?.description} 
             </FormControl>
             <br />
+
 
             <Form>
                     <Row className="mb-3" controlId="wd-points">
                         <FormLabel column sm={2}> Points </FormLabel>
-                        <Col sm={10}> <InputGroupText>100</InputGroupText> </Col>
+                        <Col sm={10}> <FormControl defaultValue={assignment?.points}/> </Col>
                     </Row>
                     <Row className="mb-3" controlId="wd-group">
                         <FormLabel column sm={2}> Assignment Group </FormLabel>
@@ -92,7 +106,7 @@ export default function AssignmentEditor() {
                              <br/>
                              <FormLabel><strong>Due</strong></FormLabel>
                             <InputGroup>
-                                <FormControl value='May 13, 2024, 11:59 PM'/>
+                                <FormControl defaultValue={dueDateFormatted} />
                                 <InputGroupText><BiCalendar className="fs-4"/></InputGroupText>
                              </InputGroup>
                              <br/>
@@ -100,7 +114,7 @@ export default function AssignmentEditor() {
                              <Col md={6}>
                                 <FormLabel><strong>Available from</strong></FormLabel>
                                 <InputGroup>
-                                <FormControl value="May 13, 2024, 11:59 PM" />
+                                <FormControl defaultValue={availableDateFormatted} />
                                 <InputGroupText>
                                     <BiCalendar className="fs-4" />
                                 </InputGroupText>
@@ -110,7 +124,7 @@ export default function AssignmentEditor() {
                             <Col md={6}>
                                 <FormLabel><strong>Until</strong></FormLabel>
                                 <InputGroup>
-                                <FormControl value="May 13, 2024, 11:59 PM" />
+                                <FormControl />
                                 <InputGroupText>
                                     <BiCalendar className="fs-4" />
                                 </InputGroupText>
@@ -126,9 +140,14 @@ export default function AssignmentEditor() {
                     </Form>
                 <hr />
                 <div className='d-flex justify-content-end gap-1'>
-                <Button variant="secondary"> Cancel</Button>
-                <Button variant="danger" className="me-2">
-                    Save</Button>
+                    <Link href={`/Courses/${cid}/Assignments/`}>
+                         <Button variant="secondary">Cancel</Button>
+                     </Link>
+                    <Link href={`/Courses/${cid}/Assignments/`}>
+                        <Button variant="danger" className="me-2">
+                            Save</Button>
+                    </Link>
+                
             
                 </div>
 
