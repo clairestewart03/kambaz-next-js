@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { FormLabel, Row, Col, FormCheck, FormSelect, Button } from "react-bootstrap";
 import InputGroupText from "react-bootstrap/esm/InputGroupText";
