@@ -12,7 +12,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { enrollCourse, unenrollCourse } from "./reducer";
 export default function Dashboard() {
     const { currentUser } = useSelector((state: any ) => state.accountReducer);
-    if (!currentUser) return <div>Loading...</div>;
     const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
     const { courses } = useSelector((state: any) => state.coursesReducer);
     const dispatch = useDispatch();
@@ -23,6 +22,8 @@ export default function Dashboard() {
       });
 
     const [showAllCourses, setShowAllCourses] = useState(false);
+    if (!currentUser) return <div>Loading...</div>;
+
     const displayedCourses = showAllCourses
         ? courses 
         : courses.filter((course: any) =>
