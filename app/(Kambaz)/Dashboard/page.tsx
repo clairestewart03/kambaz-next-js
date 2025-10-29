@@ -53,7 +53,7 @@ export default function Dashboard() {
                 <button className="btn btn-warning float-end me-2"
                 onClick={() => dispatch(updateCourse(course))} id="wd-update-course-click">
                     Update </button>
-                </h5><br />gi
+                </h5><br />
                 <FormControl value={course.name} className='mb-2'
                 onChange={(e) => setCourse({ ...course, name: e.target.value }) } />
                 <FormControl as="textarea" value={course.description} rows={3} 
