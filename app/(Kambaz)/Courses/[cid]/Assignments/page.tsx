@@ -2,6 +2,8 @@
 /* eslint-disable react/jsx-key */
 "use client";
 import Link from "next/link";
+import * as client from "./client";
+import { setAssignments } from "../Assignments/reducer";
 import { Button, ListGroup, ListGroupItem, InputGroup, FormControl } from "react-bootstrap";
 import { BsGripVertical } from "react-icons/bs";
 import { GoTriangleDown } from "react-icons/go";
@@ -11,17 +13,32 @@ import AssignmentDescriptionButtons from "./AssignmentDescriptionButtons";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import InputGroupText from "react-bootstrap/esm/InputGroupText";
 import { useParams } from "next/navigation";
-import * as db from "../../../Database";
 import FormatDate from "./FormatDate";
 import { useSelector } from "react-redux";
-import { deleteModule } from "../Modules/reducer";
+import {deleteModule, setModules} from "../Modules/reducer";
 import { useDispatch } from "react-redux";
 import DeleteAssignment from "./DeleteAssignment";
+import {setCourses} from "@/app/(Kambaz)/Courses/reducer";
+import {useEffect, useState} from "react";
 
 export default function Assignments() {
     const { cid } = useParams();
     const assignments = useSelector((state: any) => state.assignmentReducer.assignments);
     const dispatch = useDispatch();
+    const [assignmentName] = useState("");
+    const fetchAssignments = async () => {
+        const assignments = await client.findAssignmentsForCourse(cid as string);
+        dispatch(setAssignments(assignments));
+    };
+    useEffect(() => {
+        fetchAssignments();
+    }, []);
+
+    const onDeleteAssignment = async (assignmentId: string) => {
+        await client.deleteAssignment(assignmentId);
+        dispatch(setAssignments(assignments.filter((a: any) => a._id !== assignmentId)));
+    };
+
     return (
         <div id="wd-assignments">
             <div className='d-flex align-items-center justify-content-between'>
@@ -65,8 +82,7 @@ export default function Assignments() {
                     <div className='ms-auto d-flex align-items-center'>
                     <AssignmentDescriptionButtons 
                         assignmentId={assignment._id} 
-                        deleteAssignment={(assignmentId) => {
-                        dispatch(deleteModule(assignmentId));}} />
+                        deleteAssignment={(assignmentId) => onDeleteAssignment(assignmentId)} />
                     </div>
                     </ListGroupItem>
                     ))}

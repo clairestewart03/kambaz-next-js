@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+
 import { Nav, NavLink, NavItem } from "react-bootstrap";
 import Link from "next/link";
 import { use } from "react";
@@ -22,6 +24,9 @@ export default function TOC() {
         <NavItem>
             <NavLink href="/Labs/Lab4" as={Link} className={`nav-link ${pathname.endsWith("Lab4") ? "active" : ""}`}>Lab 4</NavLink>
         </NavItem>
+            <NavItem>
+                <NavLink href="/Labs/Lab5" as={Link} className={`nav-link ${pathname.endsWith("Lab5") ? "active" : ""}`}>Lab 5</NavLink>
+            </NavItem>
         <NavItem>
             <NavLink href="/" as={Link}>Kambaz</NavLink>
         </NavItem>

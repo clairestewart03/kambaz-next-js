@@ -7,36 +7,58 @@ import FormControl from "react-bootstrap/esm/FormControl";
 import Form from "react-bootstrap/Form";
 import { BiCalendar } from "react-icons/bi";
 import { useParams } from "next/navigation";
-import * as db from "../../../../Database";
+//import * as db from "../../../../Database";
 import { formatDateString } from "../FormatDateString";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
-import { addAssignment, deleteAssignment, updateAssignment } from "../reducer";
-import { useState } from "react";
+import {addAssignment, deleteAssignment, setAssignments, updateAssignment} from "../reducer";
+import {useEffect, useState} from "react";
+import * as client from "../client";
 
 export default function AssignmentEditor() {
     const { cid } = useParams();
     const { aid } = useParams();
-    const existingAssignment = db.assignments.find((a: any) => a._id === aid);
+    const [assignment, setAssignment] = useState<any>(null);
     const { assignments } = useSelector((state: any) => state.assignmentReducer);
+    const existingAssignment = assignments.find((a: any) => a._id === aid);
     const dispatch = useDispatch();
-    const [assignment, setAssignment] = useState<any>(
-        existingAssignment || {
-        _id: "", title: "New Assignment", course: cid, points: 0,
-        description: "New Assignment Description", availableDate: "2023-09-10",
-        dueDate: "2023-12-15"
-      });
+    useEffect(() => {
+        if (existingAssignment) {
+            setAssignment(existingAssignment);
+        } else {
+            setAssignment({
+                _id: "",
+                title: "New Assignment",
+                description: "",
+                points: 0,
+                course: cid,
+                availableDate: "2023-09-10",
+                dueDate: "2023-12-15"
+            });
+        }
+    }, [existingAssignment, cid]);
+
+
     const availableDateFormatted = formatDateString(assignment?.availableDate);
     const dueDateFormatted = formatDateString(assignment?.dueDate);
+    const onUpdateAssignment = async (assignment: any) => {
+        await client.updateAssignment(assignment);
+        const newAssignments = assignments.map((a: any) => a._id === assignment._id ? assignment : a );
+        dispatch(setAssignments(newAssignments));
+    };
+    const onCreateAssignmentForCourse = async () => {
+        if (!cid) return;
+        const newAssignment = { ...assignment, course: cid };
+        const createdAssignment = await client.createAssignmentForCourse(cid, newAssignment);
+        dispatch(setAssignments([...assignments, createdAssignment]));
+    };
 
-    const handleSave = () => {
+    const handleSave = async () => {
         if (existingAssignment) {
-            dispatch(updateAssignment(assignment));
-        } else { 
-            const newAssignment = { ...assignment, _id: "A" + Math.floor(100 + Math.random() * 900)};
-            dispatch(addAssignment(newAssignment));
-            console.log("New Assignment Added:", newAssignment);
-
+            console.log(assignment._id)
+            await onUpdateAssignment(assignment);
+        } else {
+            await onCreateAssignmentForCourse();
         }
     }
 
