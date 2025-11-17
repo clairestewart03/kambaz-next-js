@@ -15,12 +15,16 @@ export default function Dashboard() {
     const { currentUser } = useSelector((state: any ) => state.accountReducer);
     const { courses } = useSelector((state: any) => state.coursesReducer);
     const [allCourses, setAllCourses] = useState<any[]>([]);
-    const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
+    const { enrollments, setAllEnrollments } = useSelector((state: any) => state.enrollmentsReducer);
     const dispatch = useDispatch();
 
     const fetchAllCourses = async () => {
         const all = await client.fetchAllCourses();
         setAllCourses(all);
+    };
+    const fetchEnrollments = async () => {
+        const all = await enrollmentsClient.findEnrollmentsForUser(currentUser._id);
+        setAllEnrollments(all);
     };
 
     const fetchCourses = async () => {
@@ -33,6 +37,7 @@ export default function Dashboard() {
     };
     useEffect(() => {
         fetchCourses();
+        fetchEnrollments();
     }, [currentUser]);
 
     const [course, setCourse] = useState<any>({
@@ -63,6 +68,7 @@ export default function Dashboard() {
         const newEnrollment = await enrollmentsClient.enrollUserInCourse(userId, courseId);
         console.log("new enrollment" + newEnrollment);
         dispatch(setEnrollments([...enrollments, newEnrollment]));
+        console.log(enrollments);
     }
 
     const onUnEnrollUserInCourse = async (userId: string,courseId: string) => {

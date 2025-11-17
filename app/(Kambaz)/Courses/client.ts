@@ -47,3 +47,9 @@ export const updateCourse = async (course: any) => {
     return data;
 };
 
+export const findCoursesForEnrolledUser = async (userId: string) => {
+    const { data } = await axios.get(`${USERS_API}/${userId}/courses`);
+    return data;
+}
+
+
