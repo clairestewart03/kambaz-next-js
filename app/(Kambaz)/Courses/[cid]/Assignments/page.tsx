@@ -26,16 +26,39 @@ export default function Assignments() {
     const assignments = useSelector((state: any) => state.assignmentReducer.assignments);
     const dispatch = useDispatch();
     const [assignmentName] = useState("");
+
     const fetchAssignments = async () => {
+        console.log("=== FETCH START ===");
+        console.log("cid:", cid);
+
+        try {
+            const response = await client.findAssignmentsForCourse(cid as string);
+            console.log("Raw response:", response);
+            console.log("Response type:", typeof response);
+            console.log("Is array?", Array.isArray(response));
+            console.log("Length:", response?.length);
+            console.log("=== FETCH END ===");
+
+            dispatch(setAssignments(response));
+        } catch (error) {
+            console.error("Fetch error:", error);
+        }
+
+        /*
         const assignments = await client.findAssignmentsForCourse(cid as string);
+        console.log("assignments", assignments)
+        console.log("cid", cid)
         dispatch(setAssignments(assignments));
+
+         */
     };
+
     useEffect(() => {
         fetchAssignments();
-    }, []);
+    }, [cid]);
 
     const onDeleteAssignment = async (assignmentId: string) => {
-        await client.deleteAssignment(assignmentId);
+        await client.deleteAssignment(cid as string, assignmentId);
         dispatch(setAssignments(assignments.filter((a: any) => a._id !== assignmentId)));
     };
 
@@ -68,7 +91,7 @@ export default function Assignments() {
                 </ListGroupItem> 
 
                 <ListGroup id="wd-assignment-list-item" className="rounded-0">
-                {assignments.filter((assignment: any) => assignment.course === cid).map((assignment: any) => (
+                {assignments.map((assignment: any) => (
             <ListGroupItem className="wd-assignment-description p-3 ps-1 d-flex">
                 <BsGripVertical className="me-2 fs-3" />
                         <TbFilePencil className="me-2 fs-3" color="green" />
