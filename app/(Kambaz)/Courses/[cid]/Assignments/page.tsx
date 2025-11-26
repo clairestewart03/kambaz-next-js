@@ -28,29 +28,13 @@ export default function Assignments() {
     const [assignmentName] = useState("");
 
     const fetchAssignments = async () => {
-        console.log("=== FETCH START ===");
-        console.log("cid:", cid);
-
         try {
             const response = await client.findAssignmentsForCourse(cid as string);
-            console.log("Raw response:", response);
-            console.log("Response type:", typeof response);
-            console.log("Is array?", Array.isArray(response));
-            console.log("Length:", response?.length);
-            console.log("=== FETCH END ===");
-
             dispatch(setAssignments(response));
         } catch (error) {
             console.error("Fetch error:", error);
         }
 
-        /*
-        const assignments = await client.findAssignmentsForCourse(cid as string);
-        console.log("assignments", assignments)
-        console.log("cid", cid)
-        dispatch(setAssignments(assignments));
-
-         */
     };
 
     useEffect(() => {
@@ -58,6 +42,8 @@ export default function Assignments() {
     }, [cid]);
 
     const onDeleteAssignment = async (assignmentId: string) => {
+        console.log(cid)
+        console.log(assignmentId)
         await client.deleteAssignment(cid as string, assignmentId);
         dispatch(setAssignments(assignments.filter((a: any) => a._id !== assignmentId)));
     };

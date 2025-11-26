@@ -1,13 +1,19 @@
 import { Modal, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { deleteAssignment } from "./reducer";
+import * as client from "./client";
+import {useParams} from "next/navigation";
 
 export default function DeleteAssignment({ show, handleClose, assignmentId
 }: { show: boolean; handleClose: () => void; assignmentId: string;
 }) {
   const dispatch = useDispatch();
-  const handleDelete = (assignmentId: string) => {
-    dispatch(deleteAssignment(assignmentId)); 
+  const { cid } = useParams();
+  const handleDelete = async (assignmentId: string) => {
+      console.log("courseId", cid);
+      console.log("assignmetnId", assignmentId)
+      await client.deleteAssignment(cid as string, assignmentId);
+      dispatch(deleteAssignment(assignmentId));
   };
   return (
     <Modal show={show} onHide={handleClose}>
