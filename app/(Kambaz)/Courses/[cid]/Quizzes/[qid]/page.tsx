@@ -21,6 +21,7 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import {useEffect, useState} from "react";
 import * as client from "../client";
+import {useRouter} from "next/navigation";
 
 export default function QuizDetailsEditor() {
     const { cid } = useParams();
@@ -28,6 +29,7 @@ export default function QuizDetailsEditor() {
     const [quiz, setQuiz] = useState<any>({
         shuffleAnswers: true,
     });
+    const router = useRouter();
 
     async function fetchQuiz() {
         if (!qid) return;
@@ -62,6 +64,18 @@ export default function QuizDetailsEditor() {
         }
     };
 
+    const handleSaveAndRedirect = async () => {
+        if (quiz._id) {
+            const updatedQuiz = await client.updateQuiz(cid as string, quiz);
+            setQuiz(updatedQuiz);
+            router.push(`/Courses/${cid}/Quizzes/${updatedQuiz._id}/Details`);
+        } else {
+            const createdQuiz = await client.createQuizForCourse(cid as string, quiz);
+            setQuiz(createdQuiz);
+            router.push(`/Courses/${cid}/Quizzes/${createdQuiz._id}/Details`);
+        }
+    }
+
 
     return (
         <div id="wd-quizzes-editor" className='p-2'>
@@ -72,7 +86,7 @@ export default function QuizDetailsEditor() {
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link as={Link} href={`/Courses/${cid}/Quizzes/${qid}/Questions`} eventKey="questions">
+                    <Nav.Link onClick={handleSave} as={Link} href={`/Courses/${cid}/Quizzes/${qid}/Questions`} eventKey="questions">
                         Questions
                     </Nav.Link>
                 </Nav.Item>
@@ -103,7 +117,7 @@ export default function QuizDetailsEditor() {
                 <Row className="mb-3" id="wd-points">
                     <FormLabel column sm={2}> Points </FormLabel>
                     <Col sm={10}> <FormControl defaultValue={0}
-                                               onChange={(e) => setQuiz({ ...quiz, points: e.target.value }) }/> </Col>
+                                               onChange={(e) => setQuiz({ ...quiz, points: parseInt(e.target.value )}) }/> </Col>
                 </Row>
                 <Row className="mb-3" controlId="wd-group">
                     <FormLabel column sm={2}> Assignment Group </FormLabel>
@@ -135,7 +149,7 @@ export default function QuizDetailsEditor() {
                     id="wd-multiple-attempts"
                     label="Allow Multiple Attempts"
                     defaultChecked={false}
-                    onChange={(e) => setQuiz({ ...quiz, multipleAttempts: e.target.value }) }
+                    onChange={(e) => setQuiz({ ...quiz, multipleAttempts: e.target.checked }) }
                 />
                 <br/>
                 {quiz?.multipleAttempts && (
@@ -211,7 +225,8 @@ export default function QuizDetailsEditor() {
                                 <Col md={6}>
                                     <FormLabel><strong>Until</strong></FormLabel>
                                     <InputGroup>
-                                        <FormControl type='date'/>
+                                        <FormControl onChange={(e) => setQuiz({ ...quiz, untilDate: e.target.value }) }
+                                                     type='date' defaultValue={availableDateFormatted} />
                                         <InputGroupText>
                                             <BiCalendar className="fs-4" />
                                         </InputGroupText>
@@ -225,10 +240,9 @@ export default function QuizDetailsEditor() {
             <hr />
 
             <div className='d-flex justify-content-end gap-1'>
-                <Link href={`/Courses/${cid}/Quizzes/${qid}/Details`}>
-                    <Button onClick={handleSave} variant="danger" className="me-2">
-                        Save</Button>
-                </Link>
+                <Button onClick={handleSaveAndRedirect} variant="danger" className="me-2">
+                    Save</Button>
+
                 <Link href={`/Courses/${cid}/Quizzes/`}>
                     <Button onClick={handleSave} variant="danger" className="me-2">
                         Save and Publish</Button>

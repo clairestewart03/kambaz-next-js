@@ -107,9 +107,10 @@ export default function QuizDetails() {
             </div>)}
             <hr/>
             <h2>{quiz?.title}</h2>
-            {lastAttempt
+            {currentUser.role === "STUDENT" && (lastAttempt
                 ? <h4>Recent Score = {lastAttempt.score / calculateTotalPoints() * 100 } %</h4>
-                : <h4>No Score Yet</h4>}
+                : <h4>No Score Yet</h4>)}
+
             <div id='wd-quiz-details' className="text-end" style={{width: "max-content"}}>
                 <Form>
                     <Row className="mb-2">
@@ -216,26 +217,26 @@ export default function QuizDetails() {
                     </Row>
                 </Form>
                 <Form>
-                    <Row className="mb-2 text-nowrap">
-                        <Col xs={4} className="text-start">
+                    <Row className="mb-2 text-nowrap d-flex justify-content-between">
+                        <Col className="text-start">
                             <strong>Due</strong>
                         </Col>
-                        <Col xs={4} className="text-start">
+                        <Col className="text-start">
                             <strong>Available From</strong>
                         </Col>
-                        <Col xs={4} className="text-start">
+                        <Col className="text-start">
                             <strong>Until</strong>
                         </Col>
                     </Row>
                     <hr/>
-                    <Row className="mb-2 text-nowrap">
-                        <Col xs={4} className="text-start">
+                    <Row className="mb-2 text-nowrap d-flex justify-content-between">
+                        <Col className="text-start">
                             {formatDateString(quiz?.dueDate)}
                         </Col>
-                        <Col xs={4} className="text-start">
+                        <Col className="text-start">
                             {formatDateString(quiz?.availableDate)}
                         </Col>
-                        <Col xs={4} className="text-start">
+                        <Col className="text-start">
                             {formatDateString(quiz?.untilDate)}
                         </Col>
                     </Row>

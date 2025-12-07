@@ -35,3 +35,13 @@ export const updatePublished = async (quizId: string) => {
     const response = await axios.put(`${HTTP_SERVER}/api/quizzes/${quizId}/publish`);
     return response.data;
 }
+
+export const updatePoints = async (totalPoints: number, quizId: string) => {
+    const response = await axios.put(`${HTTP_SERVER}/api/quizzes/${quizId}/points/${totalPoints}`);
+    return response.data;
+}
+
+export const updateNumQuestions = async (numQuestions: number, quizId: string) => {
+    const response = await axios.put(`${HTTP_SERVER}/api/quizzes/${quizId}/numQuestions/${numQuestions}`);
+    return response.data;
+}

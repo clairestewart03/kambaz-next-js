@@ -11,12 +11,15 @@ import QuizControlButtons from "@/app/(Kambaz)/Courses/[cid]/Quizzes/QuizControl
 import FormControl from "react-bootstrap/FormControl";
 import FormLabel from "react-bootstrap/FormLabel"
 import Form from "react-bootstrap/Form";
+import * as quizzesClient from "@/app/(Kambaz)/Courses/[cid]/Quizzes/client";
+
 export default function QuestionsEditor() {
     const [questions, setQuestions] = useState<any[]>([]);
     const [question, setQuestion] = useState<any>(null);
     const {cid} = useParams();
     const {qid} = useParams();
     const [editingQuestionId, setEditingQuestionId] = useState<string>("");
+
 
     const fetchQuestions = async () => {
         const questions = await client.findQuestionsForQuiz(qid as string);
@@ -26,6 +29,7 @@ export default function QuestionsEditor() {
     useEffect(() => {
         fetchQuestions();
     }, [qid]);
+
 
     const onCreateQuestionForQuiz = async () => {
         if (!qid) return;
@@ -37,17 +41,41 @@ export default function QuestionsEditor() {
     const onDeleteQuestion = async (questionId: string) => {
         await client.deleteQuestionForQuiz(qid as string, questionId);
         setQuestions(questions.filter(q => q._id !== questionId));
+        const totalPoints = calculateTotalPoints();
+        const numberOfQuestions = calculateNumberOfQuestions();
+        await quizzesClient.updatePoints(totalPoints, qid as string);
+        await quizzesClient.updateNumQuestions(numberOfQuestions, qid as string);
+
     };
 
     const handleSave = async (question: any) => {
         if (question._id) {
             const updatedQuestion = await client.updateQuestionForQuiz(qid as string, question);
             setQuestion(updatedQuestion);
+            const totalPoints = calculateTotalPoints();
+            const numberOfQuestions = calculateNumberOfQuestions();
+            await quizzesClient.updatePoints(totalPoints, qid as string);
+            await quizzesClient.updateNumQuestions(numberOfQuestions, qid as string);
         } else {
             const createdQuestion = await client.createQuestionForQuiz(qid as string, question);
             setQuestion(createdQuestion);
+            const totalPoints = calculateTotalPoints();
+            const numberOfQuestions = calculateNumberOfQuestions();
+            await quizzesClient.updatePoints(totalPoints, qid as string);
+            await quizzesClient.updateNumQuestions(numberOfQuestions, qid as string);
         }
     };
+    const calculateNumberOfQuestions = () => {
+        return questions.length;
+    }
+
+    const calculateTotalPoints = () => {
+        let totalPoints = 0;
+        questions.forEach(q => {
+            totalPoints += q.points;
+        });
+        return totalPoints;
+    }
 
     return (
         <div id={'wd-questions-editor'}>
@@ -89,7 +117,7 @@ export default function QuestionsEditor() {
                                     style={{ width: "60px" }}
                                     defaultValue={question?.points}
                                     onChange={(e) =>
-                                        setQuestions(questions.map((q) => q._id === question._id ? { ...q, points: e.target.value } : q))}/>
+                                        setQuestions(questions.map((q) => q._id === question._id ? { ...q, points: parseInt(e.target.value) } : q))}/>
                                 <br/>
 
                                 <FormLabel><strong>Question:</strong></FormLabel>

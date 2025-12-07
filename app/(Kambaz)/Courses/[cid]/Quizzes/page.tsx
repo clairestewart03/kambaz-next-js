@@ -60,7 +60,6 @@ export default function Quizzes() {
         fetchQuizzes();
     }, [cid]);
 
-
     const sortedQuizzes = [...quizzes].sort(
         (a : any, b : any) => new Date(a.availableDate).getTime() - new Date(b.availableDate).getTime()
     );
