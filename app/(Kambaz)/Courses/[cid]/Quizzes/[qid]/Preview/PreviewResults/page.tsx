@@ -62,11 +62,24 @@ export default function PreviewResults() {
         return false;
     };
 
+    const calculateTotalPoints = () => {
+        let totalPoints = 0;
+        questions.forEach(q => {
+            totalPoints += q.points;
+        });
+        return totalPoints;
+    }
+
+    const calculateScore = () => {
+        const totalPoints = calculateTotalPoints()
+        return attempt?.score / totalPoints * 100 + " %";
+    }
+
     return (
         <div>
             <h1>Quiz Preview Results</h1>
             <div className={'d-flex gap-2 align-items-center'}>
-                <h2>Score: {attempt?.score}</h2>
+                <h2>Score: {calculateScore()}</h2>
                 <Link className={'ms-auto'} href={`/Courses/${cid}/Quizzes/${qid}/Questions`}>
                     <Button className={'ms-auto'} variant={'danger'}>Edit Quiz</Button>
                 </Link>
