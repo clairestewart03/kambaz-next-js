@@ -75,6 +75,19 @@ export default function QuizDetailsEditor() {
             router.push(`/Courses/${cid}/Quizzes/${createdQuiz._id}/Details`);
         }
     }
+    const handleSaveAndRedirectToQuestions = async () => {
+        if (quiz._id) {
+            console.log('quiz has ID and redirecting')
+            const updatedQuiz = await client.updateQuiz(cid as string, quiz);
+            setQuiz(updatedQuiz);
+            router.push(`/Courses/${cid}/Quizzes/${quiz._id}/Questions`);
+        } else {
+            console.log('quiz has NO ID and redirecting')
+            const createdQuiz = await client.createQuizForCourse(cid as string, quiz);
+            setQuiz(createdQuiz);
+            router.push(`/Courses/${cid}/Quizzes/${createdQuiz._id}/Questions`);
+        }
+    }
 
 
     return (
@@ -86,9 +99,7 @@ export default function QuizDetailsEditor() {
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link onClick={handleSave} as={Link} href={`/Courses/${cid}/Quizzes/${qid}/Questions`} eventKey="questions">
-                        Questions
-                    </Nav.Link>
+                    <Button className={'nav-link'} onClick={handleSaveAndRedirectToQuestions}>Questions</Button>
                 </Nav.Item>
             </Nav>
             <br/>
@@ -116,7 +127,7 @@ export default function QuizDetailsEditor() {
             <Form>
                 <Row className="mb-3" id="wd-points">
                     <FormLabel column sm={2}> Points </FormLabel>
-                    <Col sm={10}> <FormControl defaultValue={0}
+                    <Col sm={10}> <FormControl type={'number'} defaultValue={0}
                                                onChange={(e) => setQuiz({ ...quiz, points: parseInt(e.target.value )}) }/> </Col>
                 </Row>
                 <Row className="mb-3" controlId="wd-group">
