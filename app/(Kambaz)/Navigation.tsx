@@ -6,7 +6,7 @@ import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
 import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
 import { LuBookText, LuSettings } from "react-icons/lu";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
-import { FaRegCalendarAlt } from "react-icons/fa";
+import {FaFolder, FaRegCalendarAlt} from "react-icons/fa";
 import { RiInbox2Line } from "react-icons/ri";
 import { usePathname } from "next/navigation";
 
@@ -18,6 +18,7 @@ export default function KambazNavigation() {
         { label: "Calendar",  path: "/Calendar",  icon: IoCalendarOutline },
         { label: "Inbox",     path: "/Inbox",     icon: FaInbox },
         { label: "Labs",      path: "/Labs",      icon: LiaCogSolid },
+        { label: "Project Information",      path: "/ProjectInfo",      icon: FaFolder },
     ];
     return (
         <ListGroup className="rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-black z-2" style={{ width: 110 }}
